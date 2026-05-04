@@ -37,10 +37,10 @@
 
 **Independent Test**: `POST /api/auth/register` with a fresh username/email returns 201 + token. Submitting the same email a second time returns 409 "Email already registered".
 
-- [ ] T007 [US1] Implement `validateRegisterInput` — check username (3–30 chars, `^[a-zA-Z0-9_]+$`), email (valid format, lowercase), password (min 8 chars) in `server/src/middleware/validateRegister.ts`
-- [ ] T008 [US1] Implement `registerUser` service — normalise email to lowercase, check username uniqueness (409), check email uniqueness (409), hash password with bcryptjs (saltRounds 10), save User, sign JWT with payload `{ userId: user._id, username: user.username, role: user.role }`, return `AuthResponse` (no password field) in `server/src/services/auth.service.ts`
-- [ ] T009 [US1] Implement `register` controller — call `validateRegisterInput` middleware then `registerUser`; respond 201 on success in `server/src/controllers/auth.controller.ts`
-- [ ] T010 [US1] Wire `POST /api/auth/register` → `validateRegisterInput` → `register` in `server/src/routes/auth.ts`
+- [x] T007 [US1] Implement `validateRegisterInput` — check username (3–30 chars, `^[a-zA-Z0-9_]+$`), email (valid format, lowercase), password (min 8 chars) in `server/src/middleware/validateRegister.ts`
+- [x] T008 [US1] Implement `registerUser` service — normalise email to lowercase, check username uniqueness (409), check email uniqueness (409), hash password with bcryptjs (saltRounds 10), save User, sign JWT with payload `{ userId: user._id, username: user.username, role: user.role }`, return `AuthResponse` (no password field) in `server/src/services/auth.service.ts`
+- [x] T009 [US1] Implement `register` controller — call `validateRegisterInput` middleware then `registerUser`; respond 201 on success in `server/src/controllers/auth.controller.ts`
+- [x] T010 [US1] Wire `POST /api/auth/register` → `validateRegisterInput` → `register` in `server/src/routes/auth.ts`
 
 **Checkpoint**: Registration flow is end-to-end functional and independently testable.
 

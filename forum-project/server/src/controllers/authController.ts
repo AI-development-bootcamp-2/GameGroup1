@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import * as authService from '../services/authService';
-import { RegisterInput } from '../types/auth.types';
+import { RegisterInput, LoginInput } from '../types/auth.types';
 
 export async function register(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
@@ -12,12 +12,12 @@ export async function register(req: Request, res: Response, next: NextFunction):
   }
 }
 
-export async function loginHandler(req: Request, res: Response): Promise<void> {
+export async function login(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const { email, password } = req.body;
-    const result = await authService.login(email, password);
+    const input: LoginInput = req.body;
+    const result = await authService.login(input);
     res.json(result);
-  } catch (err: any) {
-    res.status(401).json({ message: err.message });
+  } catch (err) {
+    next(err);
   }
 }

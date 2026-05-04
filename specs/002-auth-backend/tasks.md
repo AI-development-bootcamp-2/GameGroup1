@@ -52,10 +52,10 @@
 
 **Independent Test**: `POST /api/auth/login` with correct credentials returns 200 + token. Wrong password and non-existent email both return 401 "Invalid email or password." with no other detail.
 
-- [ ] T011 [US2] Implement `validateLoginInput` — require non-empty email and password; return 400 if missing in `server/src/middleware/validateLogin.ts`
-- [ ] T012 [US2] Implement `loginUser` service — normalise email to lowercase, find user by email using `.select('+password')` to override `select: false` (generic 401 if not found), call `bcrypt.compare(input.password, user.password)` and return generic 401 if false, sign JWT with payload `{ userId: user._id, username: user.username, role: user.role }`, return `AuthResponse` (no password field) in `server/src/services/auth.service.ts`
-- [ ] T013 [US2] Implement `login` controller — call `validateLoginInput` then `loginUser`; respond 200 on success in `server/src/controllers/auth.controller.ts`
-- [ ] T014 [US2] Wire `POST /api/auth/login` → `validateLoginInput` → `login` in `server/src/routes/auth.ts`
+- [x] T011 [US2] Implement `validateLoginInput` — require non-empty email and password; return 400 if missing in `server/src/middleware/validateLogin.ts`
+- [x] T012 [US2] Implement `loginUser` service — normalise email to lowercase, find user by email using `.select('+password')` to override `select: false` (generic 401 if not found), call `bcrypt.compare(input.password, user.password)` and return generic 401 if false, sign JWT with payload `{ userId: user._id, username: user.username, role: user.role }`, return `AuthResponse` (no password field) in `server/src/services/auth.service.ts`
+- [x] T013 [US2] Implement `login` controller — call `validateLoginInput` then `loginUser`; respond 200 on success in `server/src/controllers/auth.controller.ts`
+- [x] T014 [US2] Wire `POST /api/auth/login` → `validateLoginInput` → `login` in `server/src/routes/auth.ts`
 
 **Checkpoint**: Login flow is end-to-end functional. Both stories are independently testable.
 

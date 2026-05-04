@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import { User } from '../models/User';
 import { signToken } from '../utils/jwt';
 import { AppError } from '../middleware/errorHandler';
-import { RegisterInput, AuthResponse } from '../types/auth.types';
+import { RegisterInput, LoginInput, AuthResponse } from '../types/auth.types';
 
 function httpError(message: string, statusCode: number): AppError {
   const err = new Error(message) as AppError;
@@ -31,15 +31,19 @@ export async function register(input: RegisterInput): Promise<AuthResponse> {
   };
 }
 
-export async function login(email: string, password: string) {
-  const user = await User.findOne({ email });
-  if (!user) throw new Error('Invalid credentials');
+export async function login(input: LoginInput): Promise<AuthResponse> {
+  const email = input.email.toLowerCase();
 
-  const valid = await bcrypt.compare(password, user.password);
-  if (!valid) throw new Error('Invalid credentials');
+  const user = await User.findOne({ email }).select('+password');
+  if (!user) throw httpError('Invalid email or password.', 401);
+
+  const valid = await bcrypt.compare(input.password, user.password);
+  if (!valid) throw httpError('Invalid email or password.', 401);
+
+  const token = signToken({ userId: String(user._id), username: user.username, role: user.role });
 
   return {
-    token: signToken({ id: user._id }),
-    user: { id: user._id, username: user.username, email },
+    token,
+    user: { id: String(user._id), username: user.username, email: user.email, role: user.role },
   };
 }

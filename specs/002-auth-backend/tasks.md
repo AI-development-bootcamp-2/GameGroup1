@@ -63,9 +63,9 @@
 
 ## Phase 5: Polish & Cross-Cutting Concerns
 
-- [ ] T015 Add Mongoose `pre('save')` hook on `User` to lowercase `email` before every save in `server/src/models/User.ts`
-- [ ] T016 [P] Add startup guard in `server/src/config/env.ts` — throw and exit if `JWT_SECRET` is absent, so the server never starts without it
-- [ ] T017 [P] Ensure `password` field has `select: false` on the User schema so it is never returned by default queries in `server/src/models/User.ts`
+- [x] T015 Add Mongoose `pre('save')` hook on `User` to lowercase `email` before every save in `server/src/models/User.ts`
+- [x] T016 [P] Add startup guard in `server/src/config/env.ts` — throw and exit if `JWT_SECRET` is absent, so the server never starts without it
+- [x] T017 [P] Ensure `password` field has `select: false` on the User schema so it is never returned by default queries in `server/src/models/User.ts`
 
 ---
 

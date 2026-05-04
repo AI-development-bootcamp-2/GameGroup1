@@ -38,7 +38,7 @@ export async function login(input: LoginInput): Promise<AuthResponse> {
   if (!user) throw httpError('Invalid email or password.', 401);
 
   const valid = await bcrypt.compare(input.password, user.password);
-  if (!valid) throw httpError('Invalid email or password.', 401);
+  if (!user) throw httpError('Invalid email or password.', 401);
 
   const token = signToken({ userId: String(user._id), username: user.username, role: user.role });
 

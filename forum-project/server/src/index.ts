@@ -1,12 +1,11 @@
+import './config/env';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import dotenv from 'dotenv';
 import { connectDB } from './config/db';
 import authRoutes from './routes/authRoutes';
 import postRoutes from './routes/postRoutes';
-
-dotenv.config();
+import { errorHandler } from './middleware/errorHandler';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -19,6 +18,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }));
+
+app.use(errorHandler);
 
 connectDB().then(() => {
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

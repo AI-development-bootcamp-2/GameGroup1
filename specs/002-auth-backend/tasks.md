@@ -21,11 +21,11 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T003 Create `User` Mongoose schema with all fields from spec §4 in `server/src/models/User.ts` (username, email, password, role, isBanned, bio, avatarUrl, timestamps)
-- [ ] T003a [P] Define TypeScript DTOs in `server/src/types/auth.types.ts`: `RegisterInput { username, email, password }`, `LoginInput { email, password }`, `AuthResponse { token, user: { id, username, email, role } }`
-- [ ] T004 [P] Create JWT utility with `signToken(payload)` and `verifyToken(token)` in `server/src/utils/jwt.ts` — payload shape: `{ userId, username, role }`; read secret from `process.env.JWT_SECRET`; throw on startup if secret is missing
-- [ ] T005 [P] Create auth router skeleton and mount it at `/api/auth` in `server/src/routes/auth.ts` and `server/src/app.ts`
-- [ ] T006 [P] Add global error handler middleware returning `{ message }` shape for 400/401/409/500 in `server/src/middleware/errorHandler.ts`
+- [x] T003 Create `User` Mongoose schema with all fields from spec §4 in `server/src/models/User.ts` (username, email, password, role, isBanned, bio, avatarUrl, timestamps)
+- [x] T003a [P] Define TypeScript DTOs in `server/src/types/auth.types.ts`: `RegisterInput { username, email, password }`, `LoginInput { email, password }`, `AuthResponse { token, user: { id, username, email, role } }`
+- [x] T004 [P] Create JWT utility with `signToken(payload)` and `verifyToken(token)` in `server/src/utils/jwt.ts` — payload shape: `{ userId, username, role }`; read secret from `process.env.JWT_SECRET`; throw on startup if secret is missing
+- [x] T005 [P] Create auth router skeleton and mount it at `/api/auth` in `server/src/routes/auth.ts` and `server/src/app.ts`
+- [x] T006 [P] Add global error handler middleware returning `{ message }` shape for 400/401/409/500 in `server/src/middleware/errorHandler.ts`
 
 **Checkpoint**: User model, JWT util, router, and error handler are in place.
 

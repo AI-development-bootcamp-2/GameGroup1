@@ -10,8 +10,8 @@
 
 **Purpose**: Ensure auth dependencies are present and environment is configured.
 
-- [ ] T001 Add `bcryptjs`, `jsonwebtoken`, `@types/bcryptjs`, `@types/jsonwebtoken` to `server/package.json`
-- [ ] T002 Add `JWT_SECRET` and `JWT_EXPIRES_IN=7d` entries to `server/.env.example`
+- [x] T001 Add `bcryptjs`, `jsonwebtoken`, `@types/bcryptjs`, `@types/jsonwebtoken` to `server/package.json`
+- [x] T002 Add `JWT_SECRET` and `JWT_EXPIRES_IN=7d` entries to `server/.env.example`
 
 ---
 

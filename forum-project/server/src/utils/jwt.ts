@@ -1,11 +1,10 @@
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
+import { jwtSecret, jwtExpiresIn } from '../config/env';
 
-const SECRET = process.env.JWT_SECRET || 'change_me';
-
-export function signToken(payload: object, expiresIn = '7d') {
-  return jwt.sign(payload, SECRET, { expiresIn });
+export function signToken(payload: object) {
+  return jwt.sign(payload, jwtSecret, { expiresIn: jwtExpiresIn as SignOptions['expiresIn'] });
 }
 
 export function verifyToken(token: string) {
-  return jwt.verify(token, SECRET);
+  return jwt.verify(token, jwtSecret);
 }

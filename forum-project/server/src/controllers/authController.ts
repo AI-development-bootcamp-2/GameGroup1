@@ -1,22 +1,23 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import * as authService from '../services/authService';
+import { RegisterInput, LoginInput } from '../types/auth.types';
 
-export async function registerHandler(req: Request, res: Response) {
+export async function register(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const { username, email, password } = req.body;
-    const result = await authService.register(username, email, password);
+    const input: RegisterInput = req.body;
+    const result = await authService.register(input);
     res.status(201).json(result);
-  } catch (err: any) {
-    res.status(400).json({ message: err.message });
+  } catch (err) {
+    next(err);
   }
 }
 
-export async function loginHandler(req: Request, res: Response) {
+export async function login(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const { email, password } = req.body;
-    const result = await authService.login(email, password);
+    const input: LoginInput = req.body;
+    const result = await authService.login(input);
     res.json(result);
-  } catch (err: any) {
-    res.status(401).json({ message: err.message });
+  } catch (err) {
+    next(err);
   }
 }

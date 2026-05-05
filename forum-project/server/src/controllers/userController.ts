@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Types } from 'mongoose';
 import { User } from '../models/User';
+import { Post } from '../models/Post';
 
 export async function getUserById(req: Request, res: Response) {
   const { id } = req.params;
@@ -10,11 +11,16 @@ export async function getUserById(req: Request, res: Response) {
   }
 
   try {
-    const user = await User.findById(id).select('-password');
+    const user = await User.findById(id).select('_id username bio avatarUrl createdAt');
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.json(user);
+
+    const posts = await Post.find({ author: user._id })
+      .sort({ createdAt: -1 })
+      .select('_id title category likeCount commentCount createdAt');
+
+    res.json({ ...user.toObject(), posts });
   } catch (err: any) {
     res.status(500).json({ message: 'Server error' });
   }

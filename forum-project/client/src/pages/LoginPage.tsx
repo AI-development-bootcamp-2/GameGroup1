@@ -24,6 +24,14 @@ export function LoginPage() {
     }
     if (result.token && result.user) {
       login(result.token, result.user, password);
+      localStorage.setItem(
+      "auth_session",
+      JSON.stringify({
+        token: result.token,
+        user: result.user,
+        pw: password
+      })
+    );
     }
     navigate('/');
     setLoading(false);

@@ -91,3 +91,11 @@ Invalid ID → show 400
 User not found → show 404
 Own profile → show edit button
 Other profile → no edit button
+
+Out of Scope
+Editing profile
+Showing email/role
+Messaging/following
+Pagination
+Real-time updates
+

@@ -5,8 +5,15 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) config.headers.Authorization = `Bearer ${token}`;
+  const raw = localStorage.getItem('forum_auth');
+  if (raw) {
+    try {
+      const { token } = JSON.parse(raw);
+      if (token) config.headers.Authorization = `Bearer ${token}`;
+    } catch {
+      // ignore malformed stored data
+    }
+  }
   return config;
 });
 

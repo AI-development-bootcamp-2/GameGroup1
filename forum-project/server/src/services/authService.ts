@@ -35,7 +35,7 @@ export async function login(input: LoginInput): Promise<AuthResponse> {
   const email = input.email.toLowerCase();
 
   const user = await User.findOne({ email }).select('+password');
-  if (!user) throw httpError('Invalid email or password.', 401);
+  if (!user) throw httpError('Email does not exist', 401);
 
   const valid = await bcrypt.compare(input.password, user.password);
   if (!user) throw httpError('Invalid email or password.', 401);

@@ -22,8 +22,8 @@ export function validateRegisterInput(req: Request, res: Response, next: NextFun
     return;
   }
 
-  if (String(password).length < 8) {
-    res.status(400).json({ message: 'password must be at least 8 characters' });
+  if (String(password).length < 1) {
+    res.status(400).json({ message: 'password must be at least 1 character' });
     return;
   }
 
